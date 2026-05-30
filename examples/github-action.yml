@@ -1,0 +1,19 @@
+name: Agent Trust Gate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  trust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Gowrav-M/agent-trust-center@v0.1.0
+        with:
+          evidence: |
+            .skillguard/reports/trust-evidence.json
+            .watchtower/reports/trust-evidence.json
+            .cognicheck/reports/trust-evidence.json
+          fail-on: review

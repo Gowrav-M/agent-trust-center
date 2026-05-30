@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "agent.trust.evidence.v1",
+  "tool": {
+    "name": "agentops-watchtower",
+    "version": "1.5.0"
+  },
+  "subject": {
+    "type": "runtime",
+    "name": "codex-demo-runtime"
+  },
+  "decision": "review",
+  "score": 45,
+  "generatedAt": "2026-05-30T00:00:00.000Z",
+  "findings": [
+    {
+      "id": "runtime.untrusted-to-shell",
+      "severity": "high",
+      "title": "Untrusted content reached shell planning",
+      "message": "A fetched web page was summarized before a shell command was proposed.",
+      "recommendation": "Require approval before shell execution after untrusted content."
+    }
+  ],
+  "artifacts": [
+    {
+      "type": "attack-graph-json",
+      "path": ".watchtower/reports/attack-graph.json"
+    }
+  ],
+  "recommendations": [
+    "Review runtime findings before promoting this agent workflow."
+  ]
+}

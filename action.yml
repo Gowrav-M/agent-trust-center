@@ -1,0 +1,37 @@
+name: Agent Trust Center
+description: Validate agent trust evidence and fail CI on review or block decisions.
+inputs:
+  evidence:
+    description: Newline-separated trust evidence JSON paths.
+    required: true
+  fail-on:
+    description: Decision threshold to fail on: review or block.
+    required: false
+    default: block
+runs:
+  using: composite
+  steps:
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22
+    - name: Install Agent Trust Center
+      shell: bash
+      run: npm install -g agent-trust-center
+    - name: Import evidence
+      shell: bash
+      run: |
+        set -euo pipefail
+        while IFS= read -r file; do
+          if [ -n "$file" ]; then
+            agent-trust-center import "$file"
+          fi
+        done <<'EOF'
+        ${{ inputs.evidence }}
+        EOF
+    - name: Generate report
+      shell: bash
+      run: agent-trust-center report
+    - name: Gate
+      shell: bash
+      run: agent-trust-center gate --fail-on "${{ inputs.fail-on }}"

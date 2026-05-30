@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "agent.trust.evidence.v1",
+  "tool": {
+    "name": "agent-endpoint-doctor",
+    "version": "0.1.0"
+  },
+  "subject": {
+    "type": "endpoint",
+    "name": "local-openai-compatible"
+  },
+  "decision": "review",
+  "score": 30,
+  "generatedAt": "2026-05-30T00:00:00.000Z",
+  "findings": [
+    {
+      "id": "endpoint.streaming_tools.failed",
+      "severity": "warning",
+      "title": "Streaming tool calls need review",
+      "message": "The endpoint passed basic chat but failed streaming tool-call compatibility.",
+      "recommendation": "Disable streaming for tool-heavy workflows or test the exact client before rollout."
+    }
+  ],
+  "artifacts": [
+    {
+      "type": "endpoint-matrix-json",
+      "path": ".endpoint-doctor/reports/compatibility-matrix.json"
+    }
+  ],
+  "recommendations": [
+    "Keep rerunning endpoint compatibility tests before switching agent providers or models."
+  ]
+}

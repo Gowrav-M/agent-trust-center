@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "agent.trust.evidence.v1",
+  "tool": {
+    "name": "nim-doctor",
+    "version": "0.1.0"
+  },
+  "subject": {
+    "type": "nim",
+    "name": "qwen/qwen3-coder"
+  },
+  "decision": "allow",
+  "score": 5,
+  "generatedAt": "2026-05-30T00:00:00.000Z",
+  "findings": [],
+  "artifacts": [
+    {
+      "type": "nim-compatibility-json",
+      "path": ".nim-doctor/reports/nim-compatibility-matrix.json"
+    }
+  ],
+  "recommendations": [
+    "Keep rerunning nim-doctor compatibility before routing new agent traffic to this NIM endpoint."
+  ]
+}
